@@ -2,6 +2,8 @@ import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default function FeedbackForm() {
   const [nama, setNama] = useState("");
@@ -77,100 +79,109 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-2xl border">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Form Umpan Balik Kampus
-        </h2>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* HEADER */}
+      <Header />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            className="input"
-            placeholder="Nama Lengkap"
-            value={nama}
-            onChange={(e) => setNama(e.target.value)}
-          />
+      {/* CONTENT */}
+      <main className="flex-grow flex items-center justify-center p-4">
+        <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-2xl border">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            Form Umpan Balik Kampus
+          </h2>
 
-          <input
-            className="input"
-            placeholder="Fakultas"
-            value={fakultas}
-            onChange={(e) => setFakultas(e.target.value)}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              className="input"
+              placeholder="Nama Lengkap"
+              value={nama}
+              onChange={(e) => setNama(e.target.value)}
+            />
 
-          <input
-            className="input"
-            placeholder="NIM"
-            value={nim}
-            onChange={(e) => setNim(e.target.value)}
-          />
+            <input
+              className="input"
+              placeholder="Fakultas"
+              value={fakultas}
+              onChange={(e) => setFakultas(e.target.value)}
+            />
 
-          <input
-            className="input"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <input
+              className="input"
+              placeholder="NIM"
+              value={nim}
+              onChange={(e) => setNim(e.target.value)}
+            />
 
-          <input
-            className="input"
-            placeholder="No. HP"
-            value={hp}
-            onChange={(e) => setHp(e.target.value)}
-          />
+            <input
+              className="input"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <select
-            className="input"
-            value={kategori}
-            onChange={(e) => setKategori(e.target.value)}
+            <input
+              className="input"
+              placeholder="No. HP"
+              value={hp}
+              onChange={(e) => setHp(e.target.value)}
+            />
+
+            <select
+              className="input"
+              value={kategori}
+              onChange={(e) => setKategori(e.target.value)}
+            >
+              <option value="">Pilih kategori</option>
+              <option value="fasilitas">Fasilitas</option>
+              <option value="dosen">Dosen</option>
+              <option value="administrasi">Administrasi</option>
+              <option value="keamanan">Keamanan</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+          </div>
+
+          <div className="mt-4">
+            <label className="label">Uraian Umpan Balik *</label>
+            <textarea
+              className="textarea"
+              placeholder="Tuliskan masalah atau keluhan..."
+              value={umpanBalik}
+              onChange={(e) => setUmpanBalik(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-3">
+            <label className="label">Usulan Solusi (opsional)</label>
+            <textarea
+              className="textarea"
+              placeholder="Tuliskan solusi yang Anda usulkan..."
+              value={solusi}
+              onChange={(e) => setSolusi(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-4">
+            <p className="label">Unggah Bukti (PDF/JPG/PNG, max 8MB)</p>
+            <input type="file" onChange={handleFile} className="mt-1" />
+            {buktiBase64 && (
+              <p className="text-green-600 text-sm mt-1">
+                File berhasil diupload ✓
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={submit}
+            disabled={loading}
+            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-medium transition"
           >
-            <option value="">Pilih kategori</option>
-            <option value="fasilitas">Fasilitas</option>
-            <option value="dosen">Dosen</option>
-            <option value="administrasi">Administrasi</option>
-            <option value="keamanan">Keamanan</option>
-            <option value="lainnya">Lainnya</option>
-          </select>
+            {loading ? "Mengirim..." : "Kirim Umpan Balik"}
+          </button>
         </div>
+      </main>
 
-        <div className="mt-4">
-          <label className="label">Uraian Umpan Balik *</label>
-          <textarea
-            className="textarea"
-            placeholder="Tuliskan masalah atau keluhan..."
-            value={umpanBalik}
-            onChange={(e) => setUmpanBalik(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-3">
-          <label className="label">Usulan Solusi (opsional)</label>
-          <textarea
-            className="textarea"
-            placeholder="Tuliskan solusi yang Anda usulkan..."
-            value={solusi}
-            onChange={(e) => setSolusi(e.target.value)}
-          />
-        </div>
-
-        <div className="mt-4">
-          <p className="label">Unggah Bukti (PDF/JPG/PNG, max 8MB)</p>
-          <input type="file" onChange={handleFile} className="mt-1" />
-          {buktiBase64 && (
-            <p className="text-green-600 text-sm mt-1">
-              File berhasil diupload ✓
-            </p>
-          )}
-        </div>
-
-        <button
-          onClick={submit}
-          disabled={loading}
-          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-medium transition"
-        >
-          {loading ? "Mengirim..." : "Kirim Umpan Balik"}
-        </button>
-      </div>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
