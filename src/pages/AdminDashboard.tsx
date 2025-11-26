@@ -164,7 +164,7 @@ export default function AdminDashboard() {
               <select
                 value={filterKategori}
                 onChange={(e) => setFilterKategori(e.target.value)}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                className="w-full border border-gray-300 cursor-pointer rounded-xl px-4 py-3 bg-white hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
               >
                 <option value="">Semua Kategori</option>
                 <option value="fasilitas">Fasilitas</option>
@@ -184,7 +184,7 @@ export default function AdminDashboard() {
               <select
                 value={filterFakultas}
                 onChange={(e) => setFilterFakultas(e.target.value)}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                className="w-full border border-gray-300 cursor-pointer rounded-xl px-4 py-3 bg-white hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
               >
                 <option value="">Semua Fakultas</option>
                 <option value="Fakultas Filsafat">Fakultas Filsafat</option>
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
               </label>
               <button
                 onClick={() => setSortAsc(!sortAsc)}
-                className={`w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 shadow-sm border ${
+                className={`w-full flex items-center cursor-pointer justify-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 shadow-sm border ${
                   sortAsc
                     ? "bg-green-500 hover:bg-green-600 text-white border-green-500"
                     : "bg-gray-100 hover:bg-gray-200 text-gray-800 border-gray-300"

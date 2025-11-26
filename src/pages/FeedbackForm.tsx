@@ -134,7 +134,7 @@ export default function FeedbackForm() {
                   Fakultas *
                 </label>
                 <select
-                  className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900"
+                  className="w-full cursor-pointer px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900"
                   value={fakultas}
                   onChange={(e) => setFakultas(e.target.value)}
                 >
@@ -202,7 +202,7 @@ export default function FeedbackForm() {
                   Kategori *
                 </label>
                 <select
-                  className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900"
+                  className="w-full cursor-pointer px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900"
                   value={kategori}
                   onChange={(e) => setKategori(e.target.value)}
                 >
