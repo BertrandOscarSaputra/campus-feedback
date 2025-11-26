@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
@@ -17,6 +17,12 @@ export default function FeedbackForm() {
   const [buktiBase64, setBuktiBase64] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // REF untuk file input
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // ===============================
+  // HANDLE FILE UPLOAD
+  // ===============================
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -27,7 +33,7 @@ export default function FeedbackForm() {
     }
 
     if (file.size > 8 * 1024 * 1024) {
-      alert("Ukuran file maks 8MB");
+      alert("Ukuran file maksimum 8MB");
       return;
     }
 
@@ -36,6 +42,9 @@ export default function FeedbackForm() {
     reader.readAsDataURL(file);
   };
 
+  // ===============================
+  // SUBMIT FEEDBACK
+  // ===============================
   const submit = async () => {
     if (!nama || !kategori || !umpanBalik.trim()) {
       alert("Isi minimal Nama, Kategori, dan Umpan Balik");
@@ -61,6 +70,7 @@ export default function FeedbackForm() {
 
       alert("Terima kasih! Umpan balik terkirim.");
 
+      // RESET STATE
       setNama("");
       setFakultas("");
       setNim("");
@@ -70,6 +80,11 @@ export default function FeedbackForm() {
       setUmpanBalik("");
       setSolusi("");
       setBuktiBase64(null);
+
+      // RESET FILE INPUT
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (err) {
       console.error(err);
       alert("Submit gagal, cek rules Firestore.");
@@ -78,12 +93,13 @@ export default function FeedbackForm() {
     setLoading(false);
   };
 
+  // ===============================
+  // UI FORM
+  // ===============================
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* HEADER */}
       <Header />
 
-      {/* CONTENT */}
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-2xl border">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
@@ -176,8 +192,22 @@ export default function FeedbackForm() {
           </div>
 
           <div className="mt-4">
-            <p className="label">Unggah Bukti (PDF/JPG/PNG, max 8MB)</p>
-            <input type="file" onChange={handleFile} className="mt-1" />
+            <p className="label">Unggah Bukti (JPG/PNG/PDF, max 8MB)</p>
+
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFile}
+              className="
+                mt-2 block w-full text-sm text-gray-700 
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-lg file:border-0
+                file:text-sm file:font-semibold
+                file:bg-blue-600 file:text-white
+                hover:file:bg-blue-700 cursor-pointer
+              "
+            />
+
             {buktiBase64 && (
               <p className="text-green-600 text-sm mt-1">
                 File berhasil diupload ✓
@@ -188,14 +218,13 @@ export default function FeedbackForm() {
           <button
             onClick={submit}
             disabled={loading}
-            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-medium transition"
+            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 cursor-pointer text-white py-3 rounded-lg text-lg font-medium transition"
           >
             {loading ? "Mengirim..." : "Kirim Umpan Balik"}
           </button>
         </div>
       </main>
 
-      {/* FOOTER */}
       <Footer />
     </div>
   );

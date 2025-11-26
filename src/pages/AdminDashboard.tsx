@@ -6,6 +6,7 @@ import {
   query,
   deleteDoc,
   doc,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../hooks/useAuth";
@@ -21,23 +22,29 @@ interface Feedback {
   umpanBalik: string;
   solusi: string;
   bukti?: string | null;
+  createdAt?: any;
 }
 
 export default function AdminDashboard() {
-  const { logout, user } = useAuth();
+  const { logout } = useAuth();
   const [items, setItems] = useState<Feedback[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"));
-    const snap = await getDocs(q);
+    setLoading(true);
+    try {
+      const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"));
+      const snap = await getDocs(q);
 
-    const data = snap.docs.map((d) => ({
-      id: d.id,
-      ...(d.data() as any),
-    }));
+      const data = snap.docs.map((d) => ({
+        id: d.id,
+        ...(d.data() as any),
+      }));
 
-    setItems(data);
+      setItems(data);
+    } catch (err) {
+      console.error(err);
+    }
     setLoading(false);
   };
 
@@ -49,6 +56,17 @@ export default function AdminDashboard() {
     setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const formatDateTime = (ts: any) => {
+    if (!ts) return "-";
+    const date = ts instanceof Timestamp ? ts.toDate() : new Date(ts); // support Timestamp or string
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  };
+
   useEffect(() => {
     load();
   }, []);
@@ -58,12 +76,22 @@ export default function AdminDashboard() {
       {/* TOP BAR */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
-        <button
-          onClick={logout}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow"
-        >
-          Logout
-        </button>
+
+        <div className="flex gap-2">
+          <button
+            onClick={load}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg cursor-pointer shadow"
+          >
+            Refresh
+          </button>
+
+          <button
+            onClick={logout}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg cursor-pointer shadow"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -81,13 +109,17 @@ export default function AdminDashboard() {
                 <h2 className="text-xl font-bold text-gray-900">{fb.nama}</h2>
                 <button
                   onClick={() => handleDelete(fb.id)}
-                  className="text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md"
+                  className="text-sm bg-red-500 hover:bg-red-600 text-white cursor-pointer px-3 py-1 rounded-md"
                 >
                   Hapus
                 </button>
               </div>
 
               <p className="text-gray-600 mt-1">{fb.email}</p>
+              <p className="text-gray-500 text-sm mt-1">
+                <span className="font-semibold">Tanggal:</span>{" "}
+                {formatDateTime(fb.createdAt)}
+              </p>
 
               <div className="mt-3 space-y-1 text-sm">
                 <p>
