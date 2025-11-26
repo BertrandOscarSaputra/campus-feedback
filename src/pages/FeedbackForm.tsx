@@ -21,8 +21,8 @@ export default function FeedbackForm() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!["image/png", "image/jpeg", "application/pdf"].includes(file.type)) {
-      alert("File harus JPG, PNG, atau PDF");
+    if (!["image/png", "image/jpeg"].includes(file.type)) {
+      alert("File harus JPG atau PNG");
       return;
     }
 
@@ -131,7 +131,7 @@ export default function FeedbackForm() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  Fakultas
+                  Fakultas *
                 </label>
                 <select
                   className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900"
@@ -162,7 +162,9 @@ export default function FeedbackForm() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">NIM</label>
+                <label className="text-sm font-medium text-gray-700">
+                  NIM *
+                </label>
                 <input
                   className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 placeholder-gray-400 text-gray-900"
                   placeholder="Nomor Induk Mahasiswa"
@@ -173,7 +175,7 @@ export default function FeedbackForm() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  E-mail
+                  E-mail *
                 </label>
                 <input
                   className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 placeholder-gray-400 text-gray-900"
@@ -235,7 +237,7 @@ export default function FeedbackForm() {
             <div className="mb-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  Usulan Solusi (opsional)
+                  Usulan Solusi
                 </label>
                 <textarea
                   className="w-full px-4 py-3 border border-blue-200 rounded-xl bg-white/80 focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 placeholder-gray-400 text-gray-900 resize-vertical min-h-[100px]"
@@ -250,7 +252,7 @@ export default function FeedbackForm() {
             <div className="mb-8">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  Unggah Bukti (PDF/JPG/PNG, max 8MB)
+                  Unggah Bukti (JPG/PNG, max 8MB)
                 </label>
                 <div className="flex items-center gap-4">
                   <input

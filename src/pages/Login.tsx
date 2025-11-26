@@ -71,7 +71,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full p-3 rounded-lg text-white font-semibold transition 
+            className={`w-full p-3 rounded-lg text-white cursor-pointer font-semibold transition 
               ${loading ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"}`}
           >
             {loading ? "Memproses..." : "Login"}

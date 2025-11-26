@@ -192,10 +192,10 @@ export default function AdminDashboard() {
                   FKIP
                 </option>
                 <option value="Fakultas Ekonomi & Bisnis">FEB</option>
-                <option value="Fakultas Ilmu Komputer">FIKOM</option>
-                <option value="Fakultas Pertanian">FAPERTA</option>
-                <option value="Fakultas Keperawatan">FKep</option>
-                <option value="Fakultas Arsitektur">Farsitek</option>
+                <option value="Fakultas Ilmu Komputer">FIK</option>
+                <option value="Fakultas Pertanian">Fakultas Pertanian</option>
+                <option value="Fakultas Keperawatan">FKEP</option>
+                <option value="Fakultas Arsitektur">Fakultas Arsitektur</option>
               </select>
             </div>
 
@@ -442,7 +442,7 @@ export default function AdminDashboard() {
                 </div>
                 <button
                   onClick={() => setSelected(null)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors duration-200"
                 >
                   <svg
                     className="w-6 h-6"
