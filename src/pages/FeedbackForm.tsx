@@ -98,12 +98,26 @@ export default function FeedbackForm() {
               onChange={(e) => setNama(e.target.value)}
             />
 
-            <input
+            <select
               className="input"
-              placeholder="Fakultas"
               value={fakultas}
               onChange={(e) => setFakultas(e.target.value)}
-            />
+            >
+              <option value="">Pilih Fakultas</option>
+              <option value="Fakultas Filsafat">Fakultas Filsafat</option>
+              <option value="Fakultas Keguruan dan Ilmu Pendidikan">
+                Fakultas Keguruan dan Ilmu Pendidikan
+              </option>
+              <option value="Fakultas Ekonomi & Bisnis">
+                Fakultas Ekonomi & Bisnis
+              </option>
+              <option value="Fakultas Ilmu Komputer">
+                Fakultas Ilmu Komputer
+              </option>
+              <option value="Fakultas Pertanian">Fakultas Pertanian</option>
+              <option value="Fakultas Keperawatan">Fakultas Keperawatan</option>
+              <option value="Fakultas Arsitektur">Fakultas Arsitektur</option>
+            </select>
 
             <input
               className="input"
@@ -136,6 +150,7 @@ export default function FeedbackForm() {
               <option value="dosen">Dosen</option>
               <option value="administrasi">Administrasi</option>
               <option value="keamanan">Keamanan</option>
+              <option value="cafetaria">Cafetaria</option>
               <option value="lainnya">Lainnya</option>
             </select>
           </div>
