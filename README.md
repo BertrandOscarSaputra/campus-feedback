@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+Campus Feedback - UNKLAB
+Platform web untuk menampung feedback dan saran dari civitas akademika Universitas Klabat (UNKLAB). Dibangun dengan teknologi modern untuk memberikan pengalaman yang optimal dalam menyampaikan aspirasi kampus.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Fitur Utama
+👤 Untuk Pengguna
+Form Feedback - Formulir pengiriman feedback yang user-friendly
 
-Currently, two official plugins are available:
+Multiple Categories - Pilihan kategori feedback (Akademik, Fasilitas, Administrasi, dll)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Image upload - Mengupload gambar untuk mendukung feedback yang diberikan
 
-## React Compiler
+Responsive Design - Tampilan optimal di semua perangkat
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👨‍💼 Untuk Admin
+Admin Dashboard - Panel admin untuk mengelola semua feedback
 
-## Expanding the ESLint configuration
+Feedback Management - Membaca, menandai, dan mengelola feedback
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Real-time Updates - Pembaruan data secara real-time dengan Firebase
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+🛠 Tech Stack
+Frontend
+Vite - Build tool dan development server yang cepat
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+React.js - Library JavaScript untuk user interface
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Tailwind CSS - Utility-first CSS framework untuk styling
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+React Router - Routing untuk single-page application
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Backend & Database
+Firebase Authentication - Sistem autentikasi pengguna
+
+Cloud Firestore - Database NoSQL real-time
