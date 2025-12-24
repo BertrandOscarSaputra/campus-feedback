@@ -93,9 +93,16 @@ export default function FeedbackForm() {
 
           <div className="relative z-10">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <div
+                className="w-16 h-16 
+  bg-gradient-to-r from-blue-400 to-cyan-500 
+  rounded-full flex items-center justify-center 
+  mx-auto mb-4 shadow-lg 
+  animate-[floatPulse_4s_ease-in-out_infinite]
+  transition-transform duration-300 hover:scale-110 hover:shadow-2xl"
+              >
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white animate-[float_3s_ease-in-out_infinite]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

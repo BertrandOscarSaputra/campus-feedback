@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-purple-800 text-white pt-10 pb-6 mt-10">
+    <footer className="bg-[#5f3a74] text-white pt-10 pb-6 mt-10">
       {/* Top horizontal line */}
       <div className="border-t border-white mx-8"></div>
 

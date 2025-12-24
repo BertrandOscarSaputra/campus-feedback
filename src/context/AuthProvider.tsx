@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   signInWithEmailAndPassword,
   signOut,
@@ -6,14 +6,7 @@ import {
 } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { auth } from "../firebase";
-
-export interface AuthContextType {
-  user: User | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-}
-
-export const AuthContext = createContext<AuthContextType | null>(null);
+import { AuthContext } from "./AuthContext";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
